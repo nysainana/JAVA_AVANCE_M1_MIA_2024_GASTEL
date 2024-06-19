@@ -1,0 +1,166 @@
+
+@import "font.css";
+
+.root{
+    -app-bg-color: #282a36;
+    -app-bg-dark: #21222c;
+    -app-border-color: #BBBBBB;
+
+    -app-primary: #076188;
+    -app-white: #FFFFFF;
+}
+
+.root *{
+    -fx-text-fill: -app-white;
+    -fx-font-size: 12px;
+    -fx-font-family: Figtree, SansSerif;
+}
+
+.jfx-rippler{
+    /*-jfx-rippler-fill: -fx-primary;*/
+}
+
+/*********************************menu*************************/
+
+.menu-bar, .context-menu{
+    -fx-background-color: #2c2c2c;
+    -fx-border-width: 0;
+}
+
+.menu-bar .label{
+    -fx-text-fill: #bbbbbb;
+}
+
+.separator-menu-item:hover,
+.radio-menu-item:hover,
+.check-menu-item:hover,
+.menu-item:hover,
+.menu:hover,
+.separator-menu-item:focused,
+.radio-menu-item:focused,
+.check-menu-item:focused,
+.menu-item:focused,
+.menu:focused{
+    -fx-background-color: #2c2c2c;
+}
+
+/******************************split pane**********************************/
+
+.split-pane{
+    -fx-background-color: -app-bg-color;
+}
+
+.split-pane-divider{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+}
+
+/*****************************scrool pane****************************/
+
+.scroll-pane{
+    -fx-border-width: 0;
+    -fx-fit-to-width: true;
+    -fx-padding: 0;
+}
+
+.scroll-pane,
+.scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.scroll-pane-control{
+    -fx-pref-width: 250px;
+    -fx-min-width: 100px;
+    -fx-max-width: 250px;
+    -fx-hbar-policy: never;
+    /*-fx-border-width: 0 1px 0 0;*/
+    /*-fx-border-color: -app-border-color;*/
+    -fx-background-color: -app-bg-dark;
+}
+
+/******************************scrool bar**************************/
+
+.scroll-bar{
+    -fx-pref-width: 10px;
+    -fx-pref-height: 10;
+    -fx-border-width: 0;
+}
+
+.scroll-bar *,
+.scroll-bar,
+.corner{
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.scroll-bar .thumb{
+    -fx-background-color: #bbb;
+    -fx-opacity: 0.2;
+    -fx-background-radius: 0px;
+    -fx-border-width: 0;
+    -fx-max-width: 7px;
+}
+
+.corner{
+    -fx-background-color: -app-bg-color;
+}
+
+.scroll-bar .thumb:pressed,
+.scroll-bar .thumb:hover
+{
+    -fx-opacity: 1;
+}
+
+.scroll-bar .track,
+.scroll-bar .track-background{
+    -fx-background-color: -app-bg-dark;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow,
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button{
+    -fx-pref-width: 0;
+    -fx-pref-heigth: 0;
+}
+
+/***************************** FOOTER *****************************/
+
+.footer{
+    -fx-background-color: -app-bg-dark;
+    -fx-pref-height: 20px;
+}
+
+
+/********************** Dialog *****************************/
+
+.jfx-dialog-layout{
+    -fx-background-color: -app-bg-color;
+    -fx-text-fill: -app-white;
+}
+
+/********************** Canvas ***************************/
+
+.pane-canvas{
+    -fx-background-image: url("../image/backgroung-canvas.jpg");
+    -fx-padding: 20;
+}
+
+.canvas{
+    -fx-background-color: -app-white;
+}
+
+/***************************** button **********************/
+
+.jfx-button{
+    -fx-padding: 7px 14px;
+}
+
+.button-primary{
+    -fx-background-color: -app-primary;
+    -fx-text-fill: -app-white;
+}

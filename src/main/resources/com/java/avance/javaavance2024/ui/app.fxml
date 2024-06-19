@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="root" prefHeight="750.0" prefWidth="1024.0" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java.avance.javaavance2024.ui.App">
+   <children>
+      <BorderPane>
+         <center>
+            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <items>
+                  <ScrollPane styleClass="scroll-pane-control">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="400.0" />
+                    </content>
+                  </ScrollPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                      <ScrollPane fitToHeight="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                          <content>
+                              <StackPane styleClass="pane-canvas" />
+                          </content>
+                      </ScrollPane>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="footer" BorderPane.alignment="CENTER" />
+         </bottom>
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="Fichier">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Quiter">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edition">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Annuler">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Retablir">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Aide">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="A propos de" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+      </BorderPane>
+   </children>
+</StackPane>
