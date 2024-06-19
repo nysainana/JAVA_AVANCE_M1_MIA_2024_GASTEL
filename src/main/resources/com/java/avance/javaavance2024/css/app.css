@@ -106,7 +106,7 @@
 }
 
 .corner{
-    -fx-background-color: -app-bg-color;
+    -fx-background-color: -app-bg-dark;
 }
 
 .scroll-bar .thumb:pressed,

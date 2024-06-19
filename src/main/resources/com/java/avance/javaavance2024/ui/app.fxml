@@ -24,7 +24,7 @@
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                       <ScrollPane fitToHeight="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                           <content>
-                              <StackPane styleClass="pane-canvas" />
+                              <StackPane fx:id="paneCanvas" styleClass="pane-canvas" />
                           </content>
                       </ScrollPane>
                   </AnchorPane>
