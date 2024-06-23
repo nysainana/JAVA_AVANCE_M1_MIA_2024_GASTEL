@@ -1,6 +1,7 @@
 package com.java.avance.javaavance2024;
 
 import com.java.avance.javaavance2024.components.ConfirmDialog;
+import com.java.avance.javaavance2024.ui.App;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/java/avance/javaavance2024/ui/app.fxml"));
         MainApplication.root = fxmlLoader.load();
+        App app = fxmlLoader.getController();
         Scene scene = new Scene(MainApplication.root, 1024, 750);
         stage.setTitle("Java avancée!");
         stage.setScene(scene);
@@ -26,7 +28,7 @@ public class MainApplication extends Application {
 
         stage.setOnCloseRequest((event) -> {
             event.consume();
-            this.closeApp(stage);
+            app.quiter(null);
         });
 
         stage.show();
@@ -34,18 +36,6 @@ public class MainApplication extends Application {
 
     public static void main(String[] args) {
         launch();
-    }
-
-    private void closeApp(Stage stage){
-        if(MainApplication.root.lookupAll("#dialog-close").isEmpty()) {
-            ConfirmDialog dialog = new ConfirmDialog("Quiter", "Etes vous sur de vouloir quiter l'application ?");
-            dialog.setId("dialog-close");
-            dialog.onConfirm(evt -> {
-                stage.close();
-                System.exit(0);
-            });
-            dialog.show();
-        }
     }
 
 }
