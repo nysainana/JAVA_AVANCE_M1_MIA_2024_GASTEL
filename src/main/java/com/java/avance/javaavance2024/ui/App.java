@@ -9,17 +9,26 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineJoin;
+import javafx.stage.FileChooser;
 
+import javax.imageio.ImageIO;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -285,6 +294,34 @@ public class App implements Initializable {
                 System.exit(0);
             });
             dialog.show();
+        }
+    }
+
+    @FXML
+    void handleSaveAs(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Enrégistrer sous");
+
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
+
+        File f = fileChooser.showSaveDialog(root.getScene().getWindow());
+
+        if(f != null){
+            try {
+                this.selectedShape.setValue(null);
+                this.canvas.get().resizableProperty().set(false);
+
+                WritableImage writableImage = new WritableImage((int) canvas.get().getWidth(), (int) canvas.get().getHeight());
+                SnapshotParameters sp = new SnapshotParameters();
+                sp.setViewport( new Rectangle2D( canvas.get().getLayoutX(), canvas.get().getLayoutY(), canvas.get().getWidth(), canvas.get().getHeight()));
+                canvas.get().snapshot( sp, writableImage);
+                RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+                ImageIO.write(renderedImage, "png", f);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+            this.canvas.get().resizableProperty().set(true);
         }
     }
 

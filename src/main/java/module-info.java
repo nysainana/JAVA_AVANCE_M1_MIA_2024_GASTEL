@@ -6,6 +6,7 @@ module com.java.avance.javaavance2024 {
     requires org.kordamp.ikonli.coreui;
     requires com.jfoenix;
     requires java.desktop;
+    requires javafx.swing;
 
     opens com.java.avance.javaavance2024 to javafx.fxml;
     exports com.java.avance.javaavance2024;
