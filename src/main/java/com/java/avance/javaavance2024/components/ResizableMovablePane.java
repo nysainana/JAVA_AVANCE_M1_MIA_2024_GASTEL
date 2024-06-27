@@ -5,9 +5,11 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 
 import java.awt.*;
 
@@ -17,6 +19,8 @@ public class ResizableMovablePane extends AnchorPane {
     private double minHeight = 0;
 
     private double xm, ym;
+
+    private final AnchorPane canvas;
 
     private final DoubleProperty maxBoundX = new SimpleDoubleProperty(-1);
     private final DoubleProperty maxBoundY = new SimpleDoubleProperty(-1);
@@ -77,8 +81,25 @@ public class ResizableMovablePane extends AnchorPane {
             this.setLayoutY(Y);
         });
 
+        canvas = new AnchorPane();
+        canvas.prefWidthProperty().bind(this.prefWidthProperty());
+        canvas.prefHeightProperty().bind(this.prefHeightProperty());
+
+        this.getChildren().add(canvas);
         this.getChildren().add(mouver);
         this.getChildren().add(resizer);
+    }
+
+    public void add(Node node){
+        this.canvas.getChildren().add(node);
+    }
+
+    public void remove(Node node){
+        this.canvas.getChildren().remove(node);
+    }
+
+    public void setClipNode(Node node){
+        this.canvas.setClip(node);
     }
 
     public void setMinimumSize(double w, double h) {
@@ -108,5 +129,13 @@ public class ResizableMovablePane extends AnchorPane {
 
     public BooleanProperty movableProperty() {
         return movable;
+    }
+
+    public void setResizable(boolean resizable){
+        this.resizable.setValue(resizable);
+    }
+
+    public void setMovable(boolean movable){
+        this.movable.setValue(movable);
     }
 }

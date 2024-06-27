@@ -100,6 +100,30 @@ public class App implements Initializable {
     @FXML
     private MenuItem menuArreter;
 
+    @FXML
+    private MenuItem menuDown;
+
+    @FXML
+    private MenuItem menuDownHeight;
+
+    @FXML
+    private MenuItem menuLeft;
+
+    @FXML
+    private MenuItem menuLeftWidth;
+
+    @FXML
+    private MenuItem menuRight;
+
+    @FXML
+    private MenuItem menuRightWidth;
+
+    @FXML
+    private MenuItem menuUp;
+
+    @FXML
+    private MenuItem menuUpHeight;
+
 
     private final ObjectProperty<ResizableMovablePane> canvas = new SimpleObjectProperty<>();
     private final ObjectProperty<JFXButton> selectedShapeMenu = new SimpleObjectProperty<>();
@@ -157,16 +181,28 @@ public class App implements Initializable {
             if(selectedShape.get() != null) selectedShape.get().getContent().setStrokeWidth(newValue);
         });
 
-        buttonDelete.setOnAction(event -> {
-            this._deleteForm();
-        });
+
         menuDelete.disableProperty().bind(selectedShape.isNull());
-        menuDelete.setOnAction(event -> {
-            this._deleteForm();
-        });
-        menuArreter.setOnAction(event -> {
-            selectedShape.setValue(null);
-        });
+        menuUp.disableProperty().bind(selectedShape.isNull());
+        menuUpHeight.disableProperty().bind(selectedShape.isNull());
+        menuDown.disableProperty().bind(selectedShape.isNull());
+        menuDownHeight.disableProperty().bind(selectedShape.isNull());
+        menuLeft.disableProperty().bind(selectedShape.isNull());
+        menuLeftWidth.disableProperty().bind(selectedShape.isNull());
+        menuRight.disableProperty().bind(selectedShape.isNull());
+        menuRightWidth.disableProperty().bind(selectedShape.isNull());
+
+        buttonDelete.setOnAction(event -> this._deleteForm());
+        menuDelete.setOnAction(event -> this._deleteForm());
+        menuArreter.setOnAction(event -> selectedShape.setValue(null));
+        menuUp.setOnAction(event -> this.resizerMover.setLayoutY(this.resizerMover.getLayoutY() - 1));
+        menuDown.setOnAction(event -> this.resizerMover.setLayoutY(this.resizerMover.getLayoutY() + 1));
+        menuLeft.setOnAction(event -> this.resizerMover.setLayoutX(this.resizerMover.getLayoutX() - 1));
+        menuRight.setOnAction(event -> this.resizerMover.setLayoutX(this.resizerMover.getLayoutX() + 1));
+        menuUpHeight.setOnAction(event -> this.resizerMover.setPrefHeight(this.resizerMover.getPrefHeight() - 1));
+        menuDownHeight.setOnAction(event -> this.resizerMover.setPrefHeight(this.resizerMover.getPrefHeight() + 1));
+        menuLeftWidth.setOnAction(event -> this.resizerMover.setPrefWidth(this.resizerMover.getPrefWidth() - 1));
+        menuRightWidth.setOnAction(event -> this.resizerMover.setPrefWidth(this.resizerMover.getPrefWidth() + 1));
 
         buttonClose.setOnAction(event -> {
             if(this.selectedShape.get() != null) this.selectedShape.setValue(null);
@@ -203,15 +239,15 @@ public class App implements Initializable {
         canvas.addListener((observableValue, oldValue, newValue) -> {
             if(newValue == null) return;
 
-            newValue.setPrefSize(500, 500);
+            newValue.setPrefSize(800, 500);
             newValue.setMinimumSize(100, 100);
             newValue.getStyleClass().add("canvas");
-            newValue.movableProperty().set(false);
+            newValue.setMovable(false);
 
             Rectangle rectangle = new Rectangle();
             rectangle.widthProperty().bind(newValue.prefWidthProperty());
             rectangle.heightProperty().bind(newValue.prefHeightProperty());
-            newValue.setClip(rectangle);
+            newValue.setClipNode(rectangle);
 
             newValue.setOnMouseClicked(event -> {
                 if(this.selectedShapeMenu.get() != null){
@@ -244,7 +280,7 @@ public class App implements Initializable {
                         shape.getContent().setStrokeWidth(strokeWidth);
                         shape.getContent().setFill(fill);
                         shape.getContent().setStrokeLineJoin(StrokeLineJoin.ROUND);
-                        newValue.getChildren().add(shape);
+                        newValue.add(shape);
                         this.selectedShape.setValue(shape);
                     }
                     this.selectedShapeMenu.setValue(null);
@@ -334,7 +370,7 @@ public class App implements Initializable {
 
     private void _deleteForm(){
         if(this.canvas.get() != null && this.selectedShape.get() != null){
-            this.canvas.get().getChildren().remove(this.selectedShape.get());
+            this.canvas.get().remove(this.selectedShape.get());
             this.selectedShape.setValue(null);
         }
     }

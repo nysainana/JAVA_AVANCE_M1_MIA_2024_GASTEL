@@ -127,14 +127,15 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="footer" BorderPane.alignment="CENTER" />
          </bottom>
          <top>
-            <MenuBar BorderPane.alignment="CENTER">
+            <MenuBar>
               <menus>
                 <Menu mnemonicParsing="false" text="Fichier">
                   <items>
                         <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Enrégistrer sous">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
-                           </accelerator></MenuItem>
+                           </accelerator>
+                        </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
                     <MenuItem mnemonicParsing="false" onAction="#quiter" text="Quiter">
                            <accelerator>
@@ -156,6 +157,54 @@
                            </accelerator>
                         </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
+                        <Menu mnemonicParsing="false" text="Déplacement">
+                          <items>
+                            <MenuItem fx:id="menuUp" disable="true" mnemonicParsing="false" text="Haut">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                              <MenuItem fx:id="menuDown" mnemonicParsing="false" text="Bas">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="DOWN" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                              <MenuItem fx:id="menuLeft" mnemonicParsing="false" text="Gauche">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="LEFT" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                              <MenuItem fx:id="menuRight" mnemonicParsing="false" text="Droite">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="RIGHT" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Taille">
+                           <items>
+                              <MenuItem fx:id="menuUpHeight" disable="true" mnemonicParsing="false" text="Reduire largeur">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="UP" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                              <MenuItem fx:id="menuDownHeight" mnemonicParsing="false" text="Agrandir largeur">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="DOWN" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                              <MenuItem fx:id="menuLeftWidth" mnemonicParsing="false" text="Reduire longeur">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="LEFT" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                              <MenuItem fx:id="menuRightWidth" mnemonicParsing="false" text="Agrandir longeur">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="RIGHT" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                           </items>
+                        </Menu>
                         <MenuItem fx:id="menuDelete" mnemonicParsing="false" text="Supprimer">
                            <accelerator>
                               <KeyCodeCombination alt="ANY" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="UP" />
