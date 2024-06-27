@@ -22,6 +22,13 @@
     /*-jfx-rippler-fill: -fx-primary;*/
 }
 
+/*************************** Separator ********************************/
+
+.separator > *{
+    -fx-border-color: -app-border;
+    -fx-border-width: 1;
+}
+
 /*********************************menu*************************/
 
 .menu-bar, .context-menu{
@@ -33,17 +40,15 @@
     -fx-text-fill: #bbbbbb;
 }
 
-.separator-menu-item:hover,
 .radio-menu-item:hover,
 .check-menu-item:hover,
 .menu-item:hover,
 .menu:hover,
-.separator-menu-item:focused,
 .radio-menu-item:focused,
 .check-menu-item:focused,
 .menu-item:focused,
 .menu:focused{
-    -fx-background-color: #2c2c2c;
+    -fx-background-color: #727272;
 }
 
 /******************************split pane**********************************/
@@ -53,11 +58,12 @@
 }
 
 .split-pane-divider{
-    -fx-background-color: -app-bg-color;
+    -fx-background-color: -app-bg-dark;
     -fx-border-color: transparent;
     -fx-background-insets: 0;
     -fx-border-width: 0;
     -fx-border-insets: 0;
+    -fx-pref-width: 1px;
 }
 
 /*****************************scrool pane****************************/
@@ -80,8 +86,8 @@
 }
 
 .scroll-pane-control{
-    -fx-min-width: 150px;
-    -fx-max-width: 250px;
+    -fx-min-width: 250px;
+    -fx-max-width: 350px;
 }
 
 .scroll-pane-form{
@@ -225,67 +231,44 @@
     /*-fx-pref-height: 15px;*/
 }
 
-/*************************** Separator ********************************/
-
-.separator > *{
-    -fx-border-color: -app-border;
-    -fx-border-width: 1;
-}
-
 /*********************** Box form **********************/
 
 .box-form{
-    -fx-padding: 20px;
-    -fx-spacing: 30px;
-}
-
-.box-form .box-form-item,
-.box-form .box-form-item .box{
-    -fx-spacing: 8px;
-}
-
-.box-form .box-form-item .box{
-    -fx-alignment: center;
-}
-
-.box-form .box-form-item-box{
+    -fx-padding: 20px 0px;
     -fx-spacing: 15px;
 }
 
-.separator{
-    -fx-background-color: -app-bg-dark !important;
-}
-
-.box-form .text-field,
-.box-form .color-picker,
-.box-form .spinner{
-    -fx-pref-height: 30px;
+.box-form > .label{
     -fx-background-color: -app-bg-dark;
     -fx-pref-width: 500px;
+    -fx-padding: 5px 10px;
+    -fx-alignment: center-right;
+}
+
+.box-form .box-form-item-group{
+    -fx-spacing: 5px;
+}
+
+.box-form .box-form-item{
+    -fx-spacing: 5px;
+    -fx-alignment: center-left;
+    -fx-fill-width: true;
+    -fx-padding: 0px 10px;
+}
+
+.box-form .box-form-item > *{
+    -fx-pref-width: 500px;
+}
+
+.box-form .spinner{
+    -fx-pref-height: 25px;
+    -fx-background-color: -app-bg-dark;
     -fx-border-color: -app-border;
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
-}
-
-.box-form .spinner .text-field{
-    -fx-pref-height: 25px;
 }
 
 .box-form .spinner > *{
     -fx-border-width: 0px;
     -fx-background-color: transparent;
 }
-
-.box-form .jfx-check-box .box {
-    -fx-pref-width: 15px;
-    -fx-pref-height: 15px;
-}
-
-/*.box-form .arrows-on-right-horizontal,*/
-/*.box-form .arrows-on-left-vertical,*/
-/*.box-form .arrows-on-left-horizontal,*/
-/*.box-form .split-arrows-vertical,*/
-/*.box-form .split-arrows-horizontal{*/
-/*    -fx-background-color: -app-danger;*/
-/*    -fx-text-fill: -app-danger;*/
-/*}*/

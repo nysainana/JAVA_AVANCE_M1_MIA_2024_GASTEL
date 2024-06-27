@@ -40,36 +40,42 @@
                            <children>
                               <VBox layoutX="66.0" layoutY="66.0" prefHeight="200.0" prefWidth="100.0" styleClass="box-form" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <VBox styleClass="box-form-item-box">
+                                    <Label text="Position">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox styleClass="box-form-item-group">
                                        <children>
-                                          <VBox styleClass="box-form-item">
+                                          <HBox styleClass="box-form-item">
                                              <children>
-                                                <Label text="Position">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <HBox styleClass="box">
-                                                   <children>
-                                                      <Spinner fx:id="fieldPosX" />
-                                                      <Label text=":" />
-                                                      <Spinner fx:id="fieldPosY" />
-                                                   </children>
-                                                </HBox>
+                                                <Label text="Position X" />
+                                                <Spinner fx:id="fieldPosX" />
                                              </children>
-                                          </VBox>
-                                          <VBox styleClass="box-form-item">
+                                          </HBox>
+                                          <HBox styleClass="box-form-item">
                                              <children>
-                                                <Label text="Taille" />
-                                                <HBox alignment="CENTER" spacing="5.0" styleClass="box">
-                                                   <children>
-                                                      <Spinner fx:id="fieldWidth" />
-                                                      <Label text="X" />
-                                                      <Spinner fx:id="fieldHeight" />
-                                                   </children>
-                                                </HBox>
+                                                <Label text="Position Y" />
+                                                <Spinner fx:id="fieldPosY" />
                                              </children>
-                                          </VBox>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <Label alignment="CENTER_RIGHT" text="Taille" />
+                                    <VBox styleClass="box-form-item-group">
+                                       <children>
+                                          <HBox alignment="CENTER" spacing="5.0" styleClass="box-form-item">
+                                             <children>
+                                                <Label text="Longeur" />
+                                                <Spinner fx:id="fieldWidth" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" spacing="5.0" styleClass="box-form-item">
+                                             <children>
+                                                <Label text="Largeur" />
+                                                <Spinner fx:id="fieldHeight" />
+                                             </children>
+                                          </HBox>
                                        </children>
                                     </VBox>
                                  </children>
