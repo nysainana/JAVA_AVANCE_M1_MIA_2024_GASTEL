@@ -240,6 +240,14 @@
                         <Tooltip text="Porte" />
                      </tooltip>
                   </JFXButton>
+                  <JFXButton fx:id="buttonWindow" contentDisplay="GRAPHIC_ONLY" layoutX="15.0" layoutY="190.0" onAction="#handleChoiceAction">
+                     <graphic>
+                        <FontIcon iconLiteral="cil-window" iconSize="18" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Fenetre" />
+                     </tooltip>
+                  </JFXButton>
                </children>
             </VBox>
          </left>

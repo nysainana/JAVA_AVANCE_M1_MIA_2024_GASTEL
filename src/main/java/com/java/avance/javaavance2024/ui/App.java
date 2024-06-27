@@ -68,6 +68,9 @@ public class App implements Initializable {
     private JFXButton buttonDoor;
 
     @FXML
+    private JFXButton buttonWindow;
+
+    @FXML
     private Spinner<Double> fieldHeight;
 
     @FXML
@@ -232,6 +235,9 @@ public class App implements Initializable {
 
                     if(this.selectedShapeMenu.get() == this.buttonDoor)
                         shape = new AppPorte();
+
+                    if(this.selectedShapeMenu.get() == this.buttonWindow)
+                        shape = new AppFenetre();
 
                     if (shape != null){
                         shape.setLayoutX(x);
