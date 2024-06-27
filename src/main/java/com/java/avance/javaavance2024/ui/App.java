@@ -65,19 +65,7 @@ public class App implements Initializable {
     private JFXButton buttonTriangle;
 
     @FXML
-    private JFXCheckBox checkContour;
-
-    @FXML
-    private JFXCheckBox checkRemplissage;
-
-    @FXML
-    private ColorPicker colorContour;
-
-    @FXML
-    private ColorPicker colorRemplissage;
-
-    @FXML
-    private Spinner<Integer> tailleContour;
+    private JFXButton buttonDoor;
 
     @FXML
     private Spinner<Double> fieldHeight;
@@ -134,22 +122,15 @@ public class App implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        colorContour.getParent().disableProperty().bind(checkContour.selectedProperty().not());
-        tailleContour.getParent().disableProperty().bind(checkContour.selectedProperty().not());
-        colorRemplissage.getParent().disableProperty().bind(checkRemplissage.selectedProperty().not());
-
         fieldPosX.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(-Double.MAX_VALUE, Double.MAX_VALUE, 0));
         fieldPosY.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(-Double.MAX_VALUE, Double.MAX_VALUE, 0));
         fieldWidth.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, Double.MAX_VALUE, 0));
         fieldHeight.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, Double.MAX_VALUE, 0));
-        tailleContour.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 3));
 
         fieldPosX.setEditable(true);
         fieldPosY.setEditable(true);
         fieldWidth.setEditable(true);
         fieldHeight.setEditable(true);
-        tailleContour.setEditable(true);
-        colorContour.setValue(Color.BLACK);
 
         fieldPosX.getValueFactory().valueProperty().addListener((observableValue, oldValue, newValue) -> {
             if(this.resizerMover != null) this.resizerMover.setLayoutX(newValue);
@@ -163,24 +144,6 @@ public class App implements Initializable {
         fieldHeight.getValueFactory().valueProperty().addListener((observableValue, oldValue, newValue) -> {
             if(this.resizerMover != null) this.resizerMover.setPrefHeight(newValue);
         });
-
-        checkContour.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(selectedShape.get() != null) selectedShape.get().getContent().setStroke(newValue ? colorContour.getValue() : Color.TRANSPARENT);
-        });
-        checkRemplissage.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(selectedShape.get() != null) selectedShape.get().getContent().setFill(newValue ? colorRemplissage.getValue() : Color.TRANSPARENT);
-        });
-
-        colorContour.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(selectedShape.get() != null) selectedShape.get().getContent().setStroke(newValue);
-        });
-        colorRemplissage.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(selectedShape.get() != null) selectedShape.get().getContent().setFill(newValue);
-        });
-        tailleContour.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(selectedShape.get() != null) selectedShape.get().getContent().setStrokeWidth(newValue);
-        });
-
 
         menuDelete.disableProperty().bind(selectedShape.isNull());
         menuUp.disableProperty().bind(selectedShape.isNull());
@@ -252,13 +215,8 @@ public class App implements Initializable {
             newValue.setOnMouseClicked(event -> {
                 if(this.selectedShapeMenu.get() != null){
                     AppShape shape = null;
-                    double w = 200;
-                    double h = 200;
                     double x = event.getX();
                     double y = event.getY();
-                    Color stroke = checkContour.isSelected() ? colorContour.getValue() : Color.TRANSPARENT;
-                    int strokeWidth = tailleContour.getValue();
-                    Color fill = checkRemplissage.isSelected() ? colorRemplissage.getValue() : Color.TRANSPARENT;
 
                     if(this.selectedShapeMenu.get() == this.buttonLine)
                         shape = new AppLine();
@@ -272,14 +230,12 @@ public class App implements Initializable {
                     if(this.selectedShapeMenu.get() == this.buttonTriangle)
                         shape = new AppTriangle();
 
+                    if(this.selectedShapeMenu.get() == this.buttonDoor)
+                        shape = new AppPorte();
+
                     if (shape != null){
-                        shape.setPrefSize(w, h);
                         shape.setLayoutX(x);
                         shape.setLayoutY(y);
-                        shape.getContent().setStroke(stroke);
-                        shape.getContent().setStrokeWidth(strokeWidth);
-                        shape.getContent().setFill(fill);
-                        shape.getContent().setStrokeLineJoin(StrokeLineJoin.ROUND);
                         newValue.add(shape);
                         this.selectedShape.setValue(shape);
                     }
@@ -295,11 +251,6 @@ public class App implements Initializable {
             if(newValue != null) {
                 newValue.setOnMouseClicked(evt -> this.selectedShape.setValue(newValue));
                 if(!splitContent.getItems().contains(scroolControl)) splitContent.getItems().addLast(scroolControl);
-                colorContour.setValue((Color) newValue.getContent().getStroke());
-                checkContour.setSelected(!newValue.getContent().getStroke().equals(Color.TRANSPARENT));
-                colorRemplissage.setValue((Color) newValue.getContent().getFill());
-                checkRemplissage.setSelected(!newValue.getContent().getFill().equals(Color.TRANSPARENT));
-                tailleContour.getValueFactory().setValue((int) newValue.getContent().getStrokeWidth());
             }
             else {
                 splitContent.getItems().remove(scroolControl);

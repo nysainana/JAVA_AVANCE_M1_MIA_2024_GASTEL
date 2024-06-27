@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
@@ -69,34 +68,6 @@
                                                       <Spinner fx:id="fieldHeight" />
                                                    </children>
                                                 </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </VBox>
-                                    <VBox styleClass="box-form-item-box">
-                                       <children>
-                                          <JFXCheckBox fx:id="checkContour" selected="true" text="Contour" />
-                                          <VBox styleClass="box-form-item">
-                                             <children>
-                                                <Label text="Couleur du contour" />
-                                                <ColorPicker fx:id="colorContour" />
-                                             </children>
-                                          </VBox>
-                                          <VBox styleClass="box-form-item">
-                                             <children>
-                                                <Label text="Epaisseur du contour" />
-                                                <Spinner fx:id="tailleContour" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </VBox>
-                                    <VBox styleClass="box-form-item-box">
-                                       <children>
-                                          <JFXCheckBox fx:id="checkRemplissage" text="Remplissage" />
-                                          <VBox styleClass="box-form-item">
-                                             <children>
-                                                <Label text="Couleur de remplissage" />
-                                                <ColorPicker fx:id="colorRemplissage" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -258,6 +229,15 @@
                      </graphic>
                      <tooltip>
                         <Tooltip text="Rectangle" />
+                     </tooltip>
+                  </JFXButton>
+                  <Separator prefWidth="200.0" />
+                  <JFXButton fx:id="buttonDoor" contentDisplay="GRAPHIC_ONLY" layoutX="15.0" layoutY="140.0" onAction="#handleChoiceAction">
+                     <graphic>
+                        <FontIcon iconLiteral="cil-door" iconSize="18" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Porte" />
                      </tooltip>
                   </JFXButton>
                </children>

@@ -225,6 +225,13 @@
     /*-fx-pref-height: 15px;*/
 }
 
+/*************************** Separator ********************************/
+
+.separator > *{
+    -fx-border-color: -app-border;
+    -fx-border-width: 1;
+}
+
 /*********************** Box form **********************/
 
 .box-form{
