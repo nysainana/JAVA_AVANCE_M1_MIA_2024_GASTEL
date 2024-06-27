@@ -13,6 +13,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point3D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.SnapshotParameters;
@@ -71,16 +72,19 @@ public class App implements Initializable {
     private JFXButton buttonWindow;
 
     @FXML
-    private Spinner<Double> fieldHeight;
+    private Spinner<Integer> fieldHeight;
 
     @FXML
-    private Spinner<Double> fieldPosX;
+    private Spinner<Integer> fieldPosX;
 
     @FXML
-    private Spinner<Double> fieldPosY;
+    private Spinner<Integer> fieldPosY;
 
     @FXML
-    private Spinner<Double> fieldWidth;
+    private Spinner<Integer> fieldWidth;
+
+    @FXML
+    private Spinner<Integer> fieldRotation;
 
     @FXML
     private StackPane paneCanvas;
@@ -115,6 +119,9 @@ public class App implements Initializable {
     @FXML
     private MenuItem menuUpHeight;
 
+    @FXML
+    private MenuItem menuNouveau;
+
 
     private final ObjectProperty<ResizableMovablePane> canvas = new SimpleObjectProperty<>();
     private final ObjectProperty<JFXButton> selectedShapeMenu = new SimpleObjectProperty<>();
@@ -125,15 +132,17 @@ public class App implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        fieldPosX.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(-Double.MAX_VALUE, Double.MAX_VALUE, 0));
-        fieldPosY.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(-Double.MAX_VALUE, Double.MAX_VALUE, 0));
-        fieldWidth.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, Double.MAX_VALUE, 0));
-        fieldHeight.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, Double.MAX_VALUE, 0));
+        fieldPosX.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-Integer.MAX_VALUE, Integer.MAX_VALUE, 0));
+        fieldPosY.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-Integer.MAX_VALUE, Integer.MAX_VALUE, 0));
+        fieldWidth.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0));
+        fieldHeight.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0));
+        fieldRotation.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 360, 0));
 
         fieldPosX.setEditable(true);
         fieldPosY.setEditable(true);
         fieldWidth.setEditable(true);
         fieldHeight.setEditable(true);
+        fieldRotation.setEditable(true);
 
         fieldPosX.getValueFactory().valueProperty().addListener((observableValue, oldValue, newValue) -> {
             if(this.resizerMover != null) this.resizerMover.setLayoutX(newValue);
@@ -146,6 +155,9 @@ public class App implements Initializable {
         });
         fieldHeight.getValueFactory().valueProperty().addListener((observableValue, oldValue, newValue) -> {
             if(this.resizerMover != null) this.resizerMover.setPrefHeight(newValue);
+        });
+        fieldRotation.getValueFactory().valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if(this.resizerMover != null) this.resizerMover.setRotate(newValue);
         });
 
         menuDelete.disableProperty().bind(selectedShape.isNull());
@@ -169,6 +181,17 @@ public class App implements Initializable {
         menuDownHeight.setOnAction(event -> this.resizerMover.setPrefHeight(this.resizerMover.getPrefHeight() + 1));
         menuLeftWidth.setOnAction(event -> this.resizerMover.setPrefWidth(this.resizerMover.getPrefWidth() - 1));
         menuRightWidth.setOnAction(event -> this.resizerMover.setPrefWidth(this.resizerMover.getPrefWidth() + 1));
+        menuNouveau.setOnAction(event -> {
+            if(MainApplication.root.lookupAll("#dialog-new").isEmpty()) {
+                ConfirmDialog dialog = new ConfirmDialog("Nouvel", "Etes vous sur de vouloir crée un nouvel espace de travail ?");
+                dialog.setId("dialog-new");
+                dialog.setOkText("Crée");
+                dialog.onConfirm(evt -> {
+                    canvas.setValue(new ResizableMovablePane());
+                });
+                dialog.show();
+            }
+        });
 
         buttonClose.setOnAction(event -> {
             if(this.selectedShape.get() != null) this.selectedShape.setValue(null);
@@ -186,24 +209,31 @@ public class App implements Initializable {
         this.resizerMover = new ResizableMovablePane();
         this.resizerMover.setStyle("-fx-border-width: 1; -fx-border-color: #666666; -fx-border-style: dashed; -fx-background-color: rgba(0, 0, 0, 0.1)");
         this.resizerMover.prefHeightProperty().addListener((ov, oldV, newV) -> {
-            this.fieldHeight.getValueFactory().setValue(newV.doubleValue());
+            this.fieldHeight.getValueFactory().setValue(newV.intValue());
             if(this.selectedShape.get() != null) this.selectedShape.get().setPrefHeight(newV.doubleValue());
         });
         this.resizerMover.prefWidthProperty().addListener((ov, oldV, newV) -> {
-            this.fieldWidth.getValueFactory().setValue(newV.doubleValue());
+            this.fieldWidth.getValueFactory().setValue(newV.intValue());
             if(this.selectedShape.get() != null) this.selectedShape.get().setPrefWidth(newV.doubleValue());
         });
         this.resizerMover.layoutXProperty().addListener((ov, oldV, newV) -> {
-            this.fieldPosX.getValueFactory().setValue(newV.doubleValue());
+            this.fieldPosX.getValueFactory().setValue(newV.intValue());
             if(this.selectedShape.get() != null) this.selectedShape.get().setLayoutX(newV.doubleValue());
         });
         this.resizerMover.layoutYProperty().addListener((ov, oldV, newV) -> {
-            this.fieldPosY.getValueFactory().setValue(newV.doubleValue());
+            this.fieldPosY.getValueFactory().setValue(newV.intValue());
             if(this.selectedShape.get() != null) this.selectedShape.get().setLayoutY(newV.doubleValue());
+        });
+        this.resizerMover.rotateProperty().addListener((ov, oldV, newV) -> {
+            this.fieldRotation.getValueFactory().setValue(newV.intValue());
+            if(this.selectedShape.get() != null) this.selectedShape.get().setRotate(newV.doubleValue());
         });
 
         canvas.addListener((observableValue, oldValue, newValue) -> {
+            if (oldValue != null) paneCanvas.getChildren().remove(oldValue);
             if(newValue == null) return;
+
+            selectedShape.setValue(null);
 
             newValue.setPrefSize(800, 500);
             newValue.setMinimumSize(100, 100);
@@ -267,6 +297,7 @@ public class App implements Initializable {
                 this.resizerMover.setLayoutX(newValue.getLayoutX());
                 this.resizerMover.setLayoutY(newValue.getLayoutY());
                 this.resizerMover.setPrefSize(newValue.getPrefWidth(), newValue.getPrefHeight());
+                this.resizerMover.setRotate(newValue.getRotate());
 
                 this.canvas.get().getChildren().remove(this.resizerMover);
                 this.canvas.get().getChildren().add(this.canvas.get().getChildren().size(), this.resizerMover);
@@ -288,6 +319,7 @@ public class App implements Initializable {
         if(MainApplication.root.lookupAll("#dialog-close").isEmpty()) {
             ConfirmDialog dialog = new ConfirmDialog("Quiter", "Etes vous sur de vouloir quiter l'application ?");
             dialog.setId("dialog-close");
+            dialog.setOkText("Quiter");
             dialog.onConfirm(evt -> {
                 System.exit(0);
             });

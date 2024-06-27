@@ -86,8 +86,8 @@
 }
 
 .scroll-pane-control{
-    -fx-min-width: 250px;
-    -fx-max-width: 350px;
+    -fx-min-width: 150px;
+    -fx-max-width: 250px;
 }
 
 .scroll-pane-form{
@@ -256,8 +256,8 @@
     -fx-padding: 0px 10px;
 }
 
-.box-form .box-form-item > *{
-    -fx-pref-width: 500px;
+.box-form .box-form-item .label{
+    -fx-min-width: 70px;
 }
 
 .box-form .spinner{
@@ -266,6 +266,7 @@
     -fx-border-color: -app-border;
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
+    -fx-pref-width: 500px;
 }
 
 .box-form .spinner > *{

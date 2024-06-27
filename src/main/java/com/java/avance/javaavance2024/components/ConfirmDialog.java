@@ -27,7 +27,7 @@ public class ConfirmDialog extends JFXDialog {
         this.titleLabel = new Label(title);
         this.contentLabel = new Label(content);
 
-        this.cancelButton = new JFXButton("Fermer");
+        this.cancelButton = new JFXButton("Annuler");
         this.cancelButton.setOnAction(event -> {
             this.close();
         });
