@@ -131,7 +131,10 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Fichier">
                   <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Enrégistrer sous" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Enrégistrer sous">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator></MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
                     <MenuItem mnemonicParsing="false" onAction="#quiter" text="Quiter">
                            <accelerator>
@@ -156,6 +159,11 @@
                         <MenuItem fx:id="menuDelete" mnemonicParsing="false" text="Supprimer">
                            <accelerator>
                               <KeyCodeCombination alt="ANY" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="menuArreter" mnemonicParsing="false" text="Arrêter l'edition">
+                           <accelerator>
+                              <KeyCodeCombination alt="ANY" code="ESCAPE" control="UP" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator>
                         </MenuItem>
                   </items>

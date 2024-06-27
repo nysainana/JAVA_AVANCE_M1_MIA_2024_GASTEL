@@ -97,6 +97,9 @@ public class App implements Initializable {
     @FXML
     private MenuItem menuDelete;
 
+    @FXML
+    private MenuItem menuArreter;
+
 
     private final ObjectProperty<ResizableMovablePane> canvas = new SimpleObjectProperty<>();
     private final ObjectProperty<JFXButton> selectedShapeMenu = new SimpleObjectProperty<>();
@@ -161,6 +164,9 @@ public class App implements Initializable {
         menuDelete.setOnAction(event -> {
             this._deleteForm();
         });
+        menuArreter.setOnAction(event -> {
+            selectedShape.setValue(null);
+        });
 
         buttonClose.setOnAction(event -> {
             if(this.selectedShape.get() != null) this.selectedShape.setValue(null);
@@ -192,9 +198,6 @@ public class App implements Initializable {
         this.resizerMover.layoutYProperty().addListener((ov, oldV, newV) -> {
             this.fieldPosY.getValueFactory().setValue(newV.doubleValue());
             if(this.selectedShape.get() != null) this.selectedShape.get().setLayoutY(newV.doubleValue());
-        });
-        this.resizerMover.setOnKeyPressed(keyEvent -> {
-            System.out.println(keyEvent.getCode());
         });
 
         canvas.addListener((observableValue, oldValue, newValue) -> {
@@ -282,7 +285,9 @@ public class App implements Initializable {
 
     @FXML
     void handleChoiceAction(ActionEvent event) {
-        selectedShapeMenu.setValue((JFXButton) event.getSource());
+        JFXButton source = (JFXButton) event.getSource();
+        if(selectedShapeMenu.get() != null && selectedShapeMenu.get().equals(source)) selectedShapeMenu.setValue(null);
+        else selectedShapeMenu.setValue(source);
     }
 
     @FXML
